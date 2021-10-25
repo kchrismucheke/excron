@@ -1,6 +1,8 @@
 defmodule Excron.Worker do
   use GenServer
   alias Excron.Allocation
+  alias Crontab.CronExpression.Parser
+  alias Crontab.Scheduler
 
   @default_function :perform
   @default_args []
