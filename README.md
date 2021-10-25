@@ -11,14 +11,14 @@ A cron-like library to run jobs in Elixir.
 ## Installation
 
     ````elixir
-    def deps.do 
-    [
-        {:excron, [github: "kchrismucheke/excron"]}
-    ]
-    end
+        def deps.do 
+        [
+            {:excron, [github: "kchrismucheke/excron"]}
+        ]
+        end
     ````
 
 ### To Do
 
-- Write documentation for excron
-- Work on configuration docs
+    - Write documentation for excron
+    - Work on configuration docs
