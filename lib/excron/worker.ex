@@ -1,8 +1,9 @@
 defmodule Excron.Worker do
+  @moduledoc false
   use GenServer
-  alias Excron.Allocation
   alias Crontab.CronExpression.Parser
   alias Crontab.Scheduler
+  alias Excron.Allocation
 
   @default_function :perform
   @default_args []
@@ -30,8 +31,8 @@ defmodule Excron.Worker do
 
     seconds =
       cron
-      |> Crontab.CronExpression.Parser.parse!(is_extended_cron_syntax)
-      |> Crontab.Scheduler.get_next_run_date!()
+      |> Parser.parse!(is_extended_cron_syntax)
+      |> Scheduler.get_next_run_date!()
       |> Timex.diff(DateTime.utc_now(), :seconds)
 
     # Add a second to prevent running same job multiple times

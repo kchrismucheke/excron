@@ -23,7 +23,8 @@ defmodule Excron.MixProject do
   defp deps do
     [
       {:crontab, "~> 1.1"},
-      {:timex, "~> 3.7"}
+      {:timex, "~> 3.7"},
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false}
     ]
   end
 end
