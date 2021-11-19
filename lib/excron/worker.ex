@@ -50,9 +50,11 @@ defmodule Excron.Worker do
       function = Map.get(job, :function, @default_function)
       args = Map.get(job, :args, @default_args)
 
-      Task.Supervisor.start_child(ExScheduler.TaskSupervisor, fn ->
+      Task.Supervisor.async(ExScheduler.TaskSupervisor, fn ->
         apply(module, function, args)
       end)
+
+      |> Task.await()
     end
 
     {:noreply, state.jobs |> new_state() |> schedule_next_job()}

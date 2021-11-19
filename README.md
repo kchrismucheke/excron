@@ -18,7 +18,30 @@ A cron-like library to run jobs in Elixir.
         end
     ````
 
+## Usage
+
+In application.ex, include Ex.Worker in your supervisiton tree
+
+    ````elixir
+        {Excron.Worker, ex_cron_config()}
+    ````
+
+Then write your configuration
+
+      ````elixir
+        def ex_cron_config()
+        [
+            # runs `Foo.Bar.perform/0` every second
+            %{cron: "* * * * * *", module: Foo.Bar},
+            # runs `Foo.Bar.custom/0` every 5 minutes
+            %{cron: "* */5 * * * *", module: Foo.Bar, function: :custom},
+            # runs `IO.puts/1` with "hello world" every day at 1:30
+            %{cron: "0 30 1 * * *", module: IO, function: :puts, args: ["hello world"]},
+        ]
+        end
+      ````
+
+Please note Cron expressions are evaluated over UTC time..
 ### To Do
 
-    - Write documentation for excron
-    - Work on configuration docs
+    - Publish to hexdocs
